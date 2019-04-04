@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DragSomething.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9E%98%EA%B7%B8-mfc-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8">마우스 드래그 MFC 프로그램</h1>
+<h2 id="%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9E%98%EA%B7%B8-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%97%90-%EA%B4%80%ED%95%98%EC%97%AC">마우스 드래그 프로그램에 관하여</h2>
+<h2 id="11-%EB%93%9C%EB%9E%98%EA%B7%B8%EB%9E%80">1.1 드래그란?</h2>
+<p>이 프로그램의 목적은 드래그의 작동원리를 이해하기 위한 실습 프로그램 이다. 프로그램의 뷰영역 안에 마우스가 들어왔을때 시스템이 보내는 메세지를 받아 처리한다.</p>
+<h2 id="12-%EB%93%9C%EB%9E%98%EA%B7%B8%EC%8B%9C-%EC%98%A4%EB%8A%94-%EB%A9%94%EC%8B%9C%EC%A7%80">1.2 드래그시 오는 메시지.</h2>
+<pre><code> 마우스 드래그시 오는 메시지는 &quot;WM_MOUSEMOVE&quot; 이다.
+ 이 메시지에 이벤트 핸들러 함수를 등록하여 마우스 
+ 움직임을 추가 기능을 구현한다. 그 단위는 마우스 
+ 포인터가 움직이는 매 순간이며, 매 순간 오는 것을 
+ 감안해 많은 연산을 집어넣지 않는다.
+</code></pre>
+<h2 id="13-%EA%B8%B0%EB%B3%B8-%EA%B8%B0%EB%8A%A5">1.3 기본 기능</h2>
+<pre><code> 기본적으로 프로그램의 뷰영역에 들어간 마우스 포인터는,
+좌표값을 왼쪽 상단에 표기하게 설정되어 있다.
+이는 뷰영역에 마우스 포인터가 들어왔음을 의미한다.
+그리고 초기 만들어지는 회색 상자내부를 드래그하면
+상자가 이동한다. 화면 밖으로 나가도 유지된다.
+만약 위치를 기억하지 못한다면, Reset메뉴를 누른다.
+자세한 설명은 하단에 표기 하겠다.
+</code></pre>
+<h2 id="14-%EB%B6%80%EA%B0%80-%EA%B8%B0%EB%8A%A5">1.4 부가 기능</h2>
+<pre><code> 메뉴바에서  Option을 클릭하면 사용할수 있는 부가기능이 나온다.
+
+    *Display Mouse Point
+    해당 메뉴의 초기 값은 보여짐이다. 
+    해당 메뉴는 체크버튼을 누름으로서 끌수 있다.
+    기능은 마우스 포인터 좌표를 표시한다.
+
+    *ResizeRectbig
+    해당 메뉴를 클릭하면 기존 회색 상자의 크기가 커진다.
+    하단의 다른 기능들과 연동된다. 더이상 커지지 않을경우
+    메뉴는 비활성화 된다.
+
+    *ResizeRectsmall
+    해당 메뉴를 클릭하면 기존 회색 상자의 크기가 작아진다.
+    하단의 다른 기능들과 연동된다. 더이상 작아지지 않을경우
+    메뉴는 비활성화 된다.
+
+    *TurnBlue
+    해당 메뉴를 클릭하면 기존 회색 상자의 색상이 파란색이 된다.
+    하단의 다른 기능들과 연동되며. 다른 색상메뉴와 조합시 새로운
+    색상을 표기한다. 새로운 색상에서 다시 파란색으로 돌아가려면 
+    메뉴를 한번더 클릭하면 된다. 그리고 색상메뉴 버튼은 비활성화 된다.
+
+    *TurnRed
+    해당 메뉴를 클릭하면 기존 회색 상자의 색상이 빨간색이 된다.
+    다른 색상메뉴와 조합시 새로운 색상을 표기한다. 새로운 색상에서 다시 빨간색으로 돌아가려면 메뉴를 한번더 클릭하면 된디.
+    그리고 색상메뉴 버튼은 비활성화 된다.
+
+    *Reset
+    상단의 모든 기능들을 초기화 시켜주는 메뉴다. 마우스 포인터 좌표, 상자의 크기, 색상, 위치를 포기값으로 되돌려준다.  
+</code></pre>
+<h2 id="15-%ED%95%99%EC%8A%B5%EB%AA%A9%ED%91%9C">1.5 학습목표</h2>
+<pre><code>마우스 포인터에 대한 이벤트 핸들러를 등록한다. 
+등록한 함수들의 기능을 구현하고 메뉴에 접근하여 
+상태를 표기한다. 혹은 메뉴에서 클릭한 함수들을 
+뷰영역에 반영하도록 구현한다.
+</code></pre>
+<blockquote>
+<p>정보 출처
+전문가 과정 수업.18-12-03~4.</p>
+</blockquote>
+
+</body>
+</html>
